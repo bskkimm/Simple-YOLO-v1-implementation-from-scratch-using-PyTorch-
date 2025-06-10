@@ -13,6 +13,7 @@ class Yolo(nn.Module):
     A model reimplementation of the YOLO (You Only Look Once) object detection architecture.
 
     This model replicates the original paper's architecture as closely as possible.
+    As described in the paper, input shape: (Batch, 3, 448, 448), output shape: (Batch, S, S, B*5+20)
     """
     def __init__(self):
         super().__init__()
@@ -88,13 +89,11 @@ class Yolo(nn.Module):
                                           nn.Conv2d(1024,1024, kernel_size=3, padding=1),
                                           nn.LeakyReLU(0.1, inplace=True))
         
-        self.prediction_head = nn.Sequential(#nn.AdaptiveAvgPool2d((1, 1)), ## (32, 1024, 7, 7) --> (32, 1024, 1, 1)
-                                             #nn.Flatten(),
-                                             nn.Linear(in_features=1024*7*7, out_features=4096),
-                                             nn.LeakyReLU(0.1, inplace=True), # YOLO use LeakyReLU and Dropout
+        self.prediction_head = nn.Sequential(nn.Linear(in_features=1024*7*7, out_features=4096),
+                                             nn.LeakyReLU(0.1, inplace=True), 
                                              nn.Dropout(0.5),
                                              nn.Linear(in_features=4096,
-                                                       out_features=S*S*(B*5 + C))) # SxSx(Bx5 + Classes)
+                                                       out_features=S*S*(B*5 + C))) 
         
     def forward(self,x):
         x = self.Conv_block1(x)
