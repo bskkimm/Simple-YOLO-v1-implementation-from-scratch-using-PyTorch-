@@ -103,7 +103,7 @@ class Yolo(nn.Module):
         x = self.Conv_block5(x)
         x = self.Conv_block6(x)
         x = x.view(x.size(0), -1)
-        x = torch.reshape(self.prediction_head(x),
-                          (x.shape[0],S, S, B*5 + C))
+        x = torch.reshape(self.prediction_head(x), 
+                          (x.shape[0],S, S, B*5 + C)) # reshape (batch, S*S*(B*5 + C)) --> (batch, S, S, B*5 + C) to match YOLO-v1's format
 
         return x
