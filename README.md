@@ -1,7 +1,7 @@
 # Simple-YOLO-v1-implementation-from-scratch-using-PyTorch-
 This repo implements **[YOLO-v1](https://arxiv.org/pdf/1506.02640)** from scratch, replicating the original paper's architecture as closely as possible.
 
-Additionally, it is beginner-friendly compared to other implementation repositories, offering a well-guided implementation in a Jupyter Notebook (.ipynb) file.
+It is more beginner-friendly than other implementation repositories, providing a well-guided workflow from data preparation to training and testing in a Jupyter Notebook (.ipynb) file.
 
 ## Guidance
 
@@ -16,6 +16,7 @@ pip install -r requirements.txt
 Then, implement YOLO-v1 step by step using `tutorial_from_scratch.ipynb`
 
 ## Result
+Coming soon
 
 
 
